@@ -20,4 +20,9 @@ export const Routes = [{
     route: "/students/:nusp",
     controller: StudentController,
     action: "remove"
+}, {
+    method: "post",
+    route: "/students/:nusp/feedback",
+    controller: StudentController,
+    action: "postFeedbackReport"
 }]

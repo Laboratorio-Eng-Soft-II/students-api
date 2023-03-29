@@ -1,5 +1,6 @@
 export default {
     port: 'PORT',
+    feedbackUrl: 'FEEDBACK_URL',
     postgresConfig: {
       host: 'POSTGRES_HOST',
       port: 'POSTGRES_PORT',

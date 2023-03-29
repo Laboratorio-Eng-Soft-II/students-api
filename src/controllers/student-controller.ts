@@ -66,4 +66,37 @@ export class StudentController {
         return "Student has been removed!"
     }
 
+    async postFeedbackReport(request: Request, response: Response, next: NextFunction){
+        const feedbackUrl = config.get<string>('feedbackUrl');
+        const { nusp } = request.params
+        
+        const {
+            author,
+            nusp_cnpj,
+            answers,
+            comments
+        } = request.body
+
+        let company = await this.studentRepository.findOneBy({ nusp })
+
+        if (!company) {
+            return "This student is not registered!"
+        }
+
+        const axiosResponse = await axios.post(feedbackUrl + '/feedback', {
+            author,
+            target: 'company',
+            nusp_cnpj,
+            answers,
+            comments
+        })
+
+        return {
+            status: axiosResponse.status,
+            id: axiosResponse.data.id,
+            nusp_cnpj,
+            author
+        }
+    }
+
 }
