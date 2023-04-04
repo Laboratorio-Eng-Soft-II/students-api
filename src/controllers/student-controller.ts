@@ -25,6 +25,7 @@ export class StudentController {
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
+        const authUrl = config.get<string>('authUrl');
         const { nusp,
                 name,
                 engineering,
@@ -32,7 +33,8 @@ export class StudentController {
                 usp_email,
                 phone,
                 skills,
-                address } = request.body;
+                address,
+                password } = request.body;
         
         let studentToAdd = await this.studentRepository.findOneBy({ nusp })
         if (studentToAdd) {
@@ -48,6 +50,13 @@ export class StudentController {
             phone,
             skills,
             address
+        })
+
+        const axiosResponse = await axios.post(authUrl + '/add', {
+            email: usp_email,
+            password,
+            category: "student",
+            nusp_cnpj: nusp
         })
 
         return this.studentRepository.save(student)
