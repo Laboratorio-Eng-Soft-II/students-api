@@ -111,4 +111,24 @@ export class StudentController {
         }
     }
 
+    async enrollInPosition(request: Request, response: Response, next: NextFunction){
+        const positionsUrl = config.get<string>('positionsUrl');
+        const positionId = request.params.positionId
+
+        const { student_nusp,
+                cv_link,
+                linkedin_link } = request.body
+
+        const axiosResponse = await axios.post(positionsUrl + '/enrollment/' + positionId, {
+            student_nusp,
+            cv_link,
+            linkedin_link
+        })
+
+        return {
+            status: axiosResponse.status,
+            id: axiosResponse.data.id
+        }
+    }
+
 }

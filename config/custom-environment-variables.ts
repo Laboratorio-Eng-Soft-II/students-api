@@ -2,6 +2,7 @@ export default {
     port: 'PORT',
     feedbackUrl: 'FEEDBACK_URL',
     authUrl: 'AUTH_URL',
+    positionsUrl: 'POSITIONS_URL',
     postgresConfig: {
       host: 'POSTGRES_HOST',
       port: 'POSTGRES_PORT',

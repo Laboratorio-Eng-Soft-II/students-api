@@ -6,6 +6,7 @@ const validateEnv = () => {
     PORT: port(),
     FEEDBACK_URL: str(),
     AUTH_URL: str(),
+    POSITIONS_URL: str(),
     POSTGRES_HOST: str(),
     POSTGRES_PORT: port(),
     POSTGRES_USER: str(),
